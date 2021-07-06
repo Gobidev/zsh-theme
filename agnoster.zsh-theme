@@ -117,7 +117,11 @@ prompt_git() {
 # Dir: current working directory
 prompt_dir() {
   local trim_path=$(print -P ' %~ ' | sed -E -e "s#([^a-z]*[a-z])[^/]*/#\1/#g")
-  prompt_segment cyan $PRIMARY_FG $trim_path
+  if [[ -n $SSH_CONNECTION ]]; then
+    prompt_segment cyan $PRIMARY_FG $trim_path
+  else
+    prompt_segment green $PRIMARY_FG $trim_path
+  fi
 }
 
 # Status:
