@@ -24,22 +24,6 @@
 
 ### Segments of the prompt, default order declaration
 
-# Function to collapse long paths
-collapse() {
-  local i pwd
-  pwd=("${(s:/:)PWD/#$HOME/~}")
-  if (( $#pwd > 1 )); then
-    for i in {1..$(($#pwd-1))}; do
-      if [[ "$pwd[$i]" = .* ]]; then
-        pwd[$i]="${${pwd[$i]}[1,2]}"
-      else
-        pwd[$i]="${${pwd[$i]}[1]}"
-      fi
-    done
-  fi
-  echo "${(j:/:)pwd}"
-}
-
 typeset -aHg AGNOSTER_PROMPT_SEGMENTS=(
     prompt_status
     prompt_context
@@ -48,6 +32,7 @@ typeset -aHg AGNOSTER_PROMPT_SEGMENTS=(
     prompt_git
     prompt_end
 )
+
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
